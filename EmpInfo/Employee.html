@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Information</title>
+	<meta charset="utf-8" />
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var uiEmp = $('#ulEmp');
+            $('#btn').click(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: 'api/Employess',
+                    dataType: 'jsonp',
+                    success: function (data) {
+                        uiEmp.empty();
+                        $.each(data, function (index, val) {
+                            var fullName = val.FirstName + ' ' + val.LastName;
+                            uiEmp.append('<li>' + fullName + '</li>');
+                        });
+                    }
+                    
+                });
+
+            });
+
+            $('#btn-clear').click(function () {
+                uiEmp.empty();
+            });
+
+        });
+
+    </script>
+</head>
+<body>
+    <input id="btn" type="button" value="Get All Employee" />
+    <input id="btn-clear"  type="button" value="Clear" />
+    <ui id="ulEmp"></ui>
+
+</body>
+</html>
